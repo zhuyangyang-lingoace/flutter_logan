@@ -250,25 +250,16 @@ public class FlutterLoganPlugin implements MethodCallHandler {
     }
     final String date = Utils.getString((Map) args, "date");
     final String serverUrl = Utils.getString((Map) args, "serverUrl");
+    final String appId = Utils.getString((Map) args, "appId");
+    final String unionId = Utils.getString((Map)args, "unionId");
+    final String deviceId = Utils.getString((Map)args, "deviceId");
     if (Utils.isEmpty(date) || Utils.isEmpty(serverUrl)) {
       result.success(false);
       return;
     }
-    final RealSendLogRunnable sendLogRunnable = new RealSendLogRunnable() {
-      @Override
-      protected void onSuccess(boolean success) {
-        replyOnMainThread(result, success);
-      }
-    };
-    Map<String, String> params = Utils.getStringMap((Map) args, "params");
-    if (params != null) {
-      Set<Map.Entry<String, String>> entrySet = params.entrySet();
-      for (Map.Entry<String, String> tempEntry : entrySet) {
-        sendLogRunnable.addHeader(tempEntry.getKey(), tempEntry.getValue());
-      }
-    }
-    sendLogRunnable.setUrl(serverUrl);
-    Logan.s(new String[]{date}, sendLogRunnable);
+    Logan.s(serverUrl, date, appId, unionId, deviceId, null, null, (statusCode, data) ->{
+       replyOnMainThread(statusCode / 100 == 2);
+    });
   }
 
 }
