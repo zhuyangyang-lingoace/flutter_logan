@@ -27,12 +27,12 @@ import android.os.Handler;
 import android.os.Looper;
 
 import com.dianping.logan.Logan;
+import com.dianping.logan.SendLogCallback;
 import com.dianping.logan.LoganConfig;
 import com.dianping.logan.Util;
 
 import java.io.File;
 import java.util.Map;
-import java.util.Set;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
@@ -257,8 +257,12 @@ public class FlutterLoganPlugin implements MethodCallHandler {
       result.success(false);
       return;
     }
-    Logan.s(serverUrl, date, appId, unionId, deviceId, null, null, (statusCode, data) ->{
-      replyOnMainThread(result, statusCode / 100 = 2);
+    Logan.s(serverUrl, date, appId, unionId, deviceId, null, null, new SendLogCallback() {
+
+      @Override
+      public void onLogSendCompleted(int statusCode, byte[] data) {
+        replyOnMainThread(result, statusCode / 100 = 2);
+      }
     });
   }
 
