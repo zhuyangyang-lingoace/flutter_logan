@@ -258,7 +258,7 @@ public class FlutterLoganPlugin implements MethodCallHandler {
       return;
     }
     Logan.s(serverUrl, date, appId, unionId, deviceId, null, null, (statusCode, data) ->{
-       replyOnMainThread(statusCode / 100 == 2);
+      replyOnMainThread(result, statusCode / 100 = 2);
     });
   }
 
