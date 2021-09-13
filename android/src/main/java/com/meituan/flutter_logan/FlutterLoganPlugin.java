@@ -253,11 +253,12 @@ public class FlutterLoganPlugin implements MethodCallHandler {
     final String appId = Utils.getString((Map) args, "appId");
     final String unionId = Utils.getString((Map)args, "unionId");
     final String deviceId = Utils.getString((Map)args, "deviceId");
+    final String appVersion = Utils.getString((Map)args, "appVersion");
     if (Utils.isEmpty(date) || Utils.isEmpty(serverUrl)) {
       result.success(false);
       return;
     }
-    Logan.s(serverUrl, date, appId, unionId, deviceId, null, null, new SendLogCallback() {
+    Logan.s(serverUrl, date, appId, unionId, deviceId, null, appVersion, new SendLogCallback() {
 
       @Override
       public void onLogSendCompleted(int statusCode, byte[] data) {
