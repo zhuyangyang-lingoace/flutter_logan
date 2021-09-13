@@ -44,8 +44,8 @@ class FlutterLogan {
     return result;
   }
 
-  static Future<bool> upload(String serverUrl, String date, String appId, String unionId, String deviceId) async {
-    final bool result = await _channel.invokeMethod('upload',{'date': date, 'serverUrl': serverUrl, 'appId': appId, 'unionId': unionId, 'deviceId': deviceId});
+  static Future<bool> upload(String serverUrl, String date, String appId, String unionId, String deviceId, String appVersion) async {
+    final bool result = await _channel.invokeMethod('upload',{'date': date, 'serverUrl': serverUrl, 'appId': appId, 'unionId': unionId, 'deviceId': deviceId, 'appVersion': appVersion});
     return result;
   }
 
