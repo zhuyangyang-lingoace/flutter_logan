@@ -106,7 +106,8 @@ class _MyAppState extends State<MyApp> {
           date,
           'FlutterTestAppId',
           'FlutterTestUnionId',
-          'FlutterTestDeviceId'
+          'FlutterTestDeviceId',
+          ''
           );
       if (back) {
         result = 'Upload to server succeed';
